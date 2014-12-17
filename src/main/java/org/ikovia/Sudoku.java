@@ -154,6 +154,11 @@ public class Sudoku implements Callable<Sudoku> {
         return true;
     }
 
+    /**
+     * Check vertically, horizontally and each sub-grid are whether in valid state or not
+     * @return true if all inputs are valid
+     * @throws InvalidSudokuException
+     */
     public boolean isValid() throws InvalidSudokuException{
 
         for(int i = 0; i < SIZE; i++){
