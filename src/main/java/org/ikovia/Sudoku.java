@@ -1,13 +1,22 @@
 package org.ikovia;
 
-public class Sudoku {
+import java.util.concurrent.Callable;
+
+public class Sudoku implements Callable<Sudoku> {
+
+    public enum Solution{
+        NOT_SOLVED, VALID, INVALID
+    };
 
     private int [][] data;
     private final int SUB_SIZE = 3;
     public final int SIZE = 9;
 
+    public Solution status;
+
     public Sudoku(){
 
+        this.status = Solution.NOT_SOLVED;
         this.data = new int[SIZE][SIZE];
     }
 
@@ -39,6 +48,14 @@ public class Sudoku {
                 }
             }
         }
+    }
+
+    @Override
+    public Sudoku call() throws Exception{
+
+        isValid();
+
+        return this;
     }
 
     private void checkBoundaries(int i, int j) throws InvalidSudokuException{
@@ -147,11 +164,14 @@ public class Sudoku {
                 boolean res2 = checkVertical(i,j);
                 boolean res3 = checkSubMatrix(i,j);
 
-                if(!res1 || !res2 || !res3 )
+                if(!res1 || !res2 || !res3 ) {
+                    status = Solution.INVALID;
                     return false;
+                }
             }
         }
 
+        status = Solution.VALID;
         return true;
     }
 

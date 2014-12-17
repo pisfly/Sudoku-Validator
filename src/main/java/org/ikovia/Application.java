@@ -11,7 +11,7 @@ public class Application {
         try{
 
             SudokuSolver solver = new SudokuSolver("/samples.txt");
-            solver.solve();
+            solver.solveWithThread();
         }
         catch(Exception e){
 
