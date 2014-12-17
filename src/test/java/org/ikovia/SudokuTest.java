@@ -135,4 +135,63 @@ public class SudokuTest {
         }
     }
 
+    @Test
+    public void verticalCheck(){
+
+        try{
+
+            Sudoku validObj = new Sudoku("123456789578139624496872153952381467641297833387564291714623548864915372235748916");
+
+            assertTrue(validObj.checkVertical(5,0));
+            assertTrue(validObj.checkVertical(4,4));
+
+            assertFalse(validObj.checkVertical(2,8));
+            assertFalse(validObj.checkVertical(7,2));
+
+        }
+        catch(InvalidSudokuException e){
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void horizontalCheck(){
+
+        try{
+
+            Sudoku validObj = new Sudoku("123456789578139624496872153952381367641294835387564291719623548864915372235748916");
+
+            assertTrue(validObj.checkHorizontal(2,2));
+            assertTrue(validObj.checkHorizontal(0, 3));
+
+            assertFalse(validObj.checkHorizontal(4,1));
+            assertFalse(validObj.checkHorizontal(3,3));
+
+        }
+        catch(InvalidSudokuException e){
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void validCheck(){
+
+        try{
+
+            Sudoku validObj = new Sudoku("123456789578139624496872153952381467641297835387564291719623548864915372235748916");
+            Sudoku invalidHorizontalObj = new Sudoku("123456789578139624496872153952381367641294835387564291719623548864915372235748916");
+            Sudoku invalidVerticalObj = new Sudoku("123456789578139624496872153952381467641297833387564291714623548864915372235748916");
+            Sudoku invalidSubMatrixObj = new Sudoku("123456789578139624496872153952381467641297835387564291719623548864915372235738916");
+
+            assertTrue(validObj.isValid());
+            assertFalse(invalidHorizontalObj.isValid());
+            assertFalse(invalidVerticalObj.isValid());
+            assertFalse(invalidSubMatrixObj.isValid());
+
+        }
+        catch(InvalidSudokuException e){
+            fail(e.getMessage());
+        }
+    }
+
 }

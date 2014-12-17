@@ -137,6 +137,24 @@ public class Sudoku {
         return true;
     }
 
+    public boolean isValid() throws InvalidSudokuException{
+
+        for(int i = 0; i < SIZE; i++){
+
+            for(int j = 0; j < SIZE; j++){
+
+                boolean res1 = checkHorizontal(i,j);
+                boolean res2 = checkVertical(i,j);
+                boolean res3 = checkSubMatrix(i,j);
+
+                if(!res1 || !res2 || !res3 )
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Find 3x3 sub grid boundaries for a specified cell indices
      * @param i row index
@@ -165,5 +183,22 @@ public class Sudoku {
         subMatrix[1][1] = maxJ;
 
         return subMatrix;
+    }
+
+    @Override
+    public String toString(){
+
+        String all = "";
+
+        for(int i = 0; i < SIZE; i++){
+
+            for(int j = 0; j < SIZE; j++){
+                all += data[i][j];
+                all += " ";
+            }
+            all += "\n";
+        }
+
+        return all;
     }
 }

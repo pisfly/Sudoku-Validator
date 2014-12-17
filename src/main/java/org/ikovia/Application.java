@@ -1,33 +1,19 @@
 package org.ikovia;
 
-import java.io.*;
-
+import java.io.FileNotFoundException;
 
 public class Application {
 
     public static void main(String [] args){
 
-        System.out.println("Application Started");
+        System.out.println("Sudoku solver started...");
 
-        Application app = new Application();
+        try{
 
-        File sampleFile = new File(app.getClass().getResource("/samples.txt").getFile());
-
-        try {
-
-            BufferedReader fileReader = new BufferedReader(new FileReader(sampleFile));
-
-            String line;
-            while((line = fileReader.readLine()) != null){
-
-                System.out.println(line);
-            }
+            SudokuSolver solver = new SudokuSolver("/samples.txt");
+            solver.solve();
         }
-        catch(FileNotFoundException e){
-
-            System.out.println(e.toString());
-        }
-        catch(IOException e){
+        catch(Exception e){
 
             System.out.println(e.toString());
         }
