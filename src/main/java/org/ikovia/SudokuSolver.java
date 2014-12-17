@@ -24,14 +24,20 @@ public class SudokuSolver {
 
         BufferedReader fileReader = new BufferedReader((new InputStreamReader(getClass().getResourceAsStream(filename))));
 
-        String line;
-        while ((line = fileReader.readLine()) != null) {
+        try {
 
-            if (line.isEmpty() || line.charAt(0) == '#')
-                continue;
+            String line;
+            while ((line = fileReader.readLine()) != null) {
 
-            Sudoku s = new Sudoku(line);
-            solutions.add(s);
+                if (line.isEmpty() || line.charAt(0) == '#')
+                    continue;
+
+                Sudoku s = new Sudoku(line);
+                solutions.add(s);
+            }
+        } finally {
+
+            fileReader.close();
         }
 
     }

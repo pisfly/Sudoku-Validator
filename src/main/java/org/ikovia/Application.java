@@ -1,6 +1,5 @@
 package org.ikovia;
 
-import java.io.FileNotFoundException;
 
 public class Application {
 
